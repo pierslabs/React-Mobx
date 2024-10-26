@@ -7,9 +7,9 @@ const TodoList = observer(() => {
   const counterRender = useRef(0);
 
   useEffect(() => {
-    counterRender.current += 1;
     console.log('TodoList rendered:', counterRender.current);
-  });
+    todoStore.load('https://jsonplaceholder.typicode.com/todos');
+  }, []);
 
   return (
     <List component='nav' sx={{ width: 320 }}>
@@ -22,10 +22,10 @@ const TodoList = observer(() => {
               width: '100%',
             }}
           >
-            <Typography>{todo.task}</Typography>
+            <Typography>{todo.title}</Typography>
             <IconButton
               size='small'
-              onClick={() => todoStore.removeTodo(todo.task)}
+              onClick={() => todoStore.removeTodo(todo.title)}
             >
               🗑️
             </IconButton>

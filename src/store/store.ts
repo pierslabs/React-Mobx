@@ -2,7 +2,7 @@ import { makeAutoObservable, action } from 'mobx';
 
 export interface Todo {
   id: number;
-  task: string;
+  title: string;
 }
 
 export class TodoStoreImpl {
@@ -14,18 +14,27 @@ export class TodoStoreImpl {
       addTodo: action,
       removeTodo: action,
       setNewTodo: action,
+      load: action,
     });
   }
 
-  addTodo = (task: string) => {
+  load: (url: string) => void = () => {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then((response) => response.json())
+      .then((json) => {
+        this.todos = [...json.slice(0, 5)];
+      });
+  };
+
+  addTodo = (title: string) => {
     this.todos.push({
-      id: this.todos.length,
-      task,
+      id: Math.floor(Math.random() * 100),
+      title,
     });
   };
 
-  removeTodo = (task: string) => {
-    this.todos = this.todos.filter((todo) => todo.task !== task);
+  removeTodo = (title: string) => {
+    this.todos = this.todos.filter((todo) => todo.title !== title);
   };
 
   setNewTodo = (value: string) => {
