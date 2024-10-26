@@ -1,50 +1,35 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite + MobX Example
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este repositorio es un ejemplo de una aplicación React configurada con TypeScript y Vite, y con estado global manejado mediante **MobX**. Utiliza MobX para una gestión de estado reactiva y eficiente, ideal para proyectos que requieren sincronización y reactividad en sus datos de forma centralizada.
 
-Currently, two official plugins are available:
+La configuración incluye lo siguiente:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** con **TypeScript** para desarrollo de interfaces con tipado estático.
+- **Vite** como herramienta de construcción rápida.
+- **MobX** para una gestión de estado fácil de usar y reactiva.
+- Reglas de **ESLint** configuradas para TypeScript y React.
 
-## Expanding the ESLint configuration
+## Características principales
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **MobX Store**:
 
-- Configure the top-level `parserOptions` property like this:
+   - MobX es usado para definir y gestionar el estado global de la aplicación. El estado se actualiza de manera reactiva y permite a los componentes observar cambios específicos.
+   - Las acciones en el store están configuradas como `actions` para que las modificaciones del estado sean controladas.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+2. **Componente de entrada controlado**:
+   - Incluye un componente de input que utiliza MobX para actualizar su valor solo al agregar un elemento, evitando renders innecesarios.
+3. **Funcionalidad de lista**:
+   - La aplicación muestra una lista de tareas (todos) donde cada tarea se añade o elimina de la lista a través de MobX, asegurando que los cambios en el store se reflejen automáticamente en la interfaz.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Estructura del proyecto
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+├── public           # Archivos públicos
+├── src
+│   ├── store        # Archivos de MobX store
+│   ├── components   # Componentes React
+│   └── App.tsx      # Componente principal
+├── tsconfig.json    # Configuración de TypeScript
+├── vite.config.ts   # Configuración de Vite
+└── README.md
 ```

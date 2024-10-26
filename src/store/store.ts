@@ -13,7 +13,7 @@ export class TodoStoreImpl {
     makeAutoObservable(this, {
       addTodo: action,
       removeTodo: action,
-      setNewTodo: action, // Habilitamos esta acción
+      setNewTodo: action,
     });
   }
 
